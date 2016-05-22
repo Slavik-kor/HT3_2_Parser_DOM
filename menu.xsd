@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/menu"
+	xmlns:tns="http://www.example.org/menu"  elementFormDefault="qualified">
+	<element name="main-menu">
+		<complexType>
+			<sequence>
+				<element name="header" minOccurs="1" maxOccurs="1">
+					<complexType>
+						<sequence>
+							<element name="photo" type="string" />
+							<element name="name" type="string" />
+							<element name="description" type="string" />
+							<element name="portion" type="string" />
+							<element name="price" type="string" />
+						</sequence>
+					</complexType>
+				</element>
+				<element name="category" minOccurs="1" maxOccurs="unbounded">
+					<complexType>
+						<sequence>
+							<element name="dish" type="tns:Dish" minOccurs="1"
+								maxOccurs="unbounded" />
+						</sequence>
+						<attribute name="id" type="ID"  />
+						<attribute name="name" type="tns:itemMenu" />
+					</complexType>
+				</element>
+			</sequence>
+		</complexType>
+	</element>
+
+	<complexType name="Dish">
+		<sequence>
+			<element name="photo" type="string" minOccurs="0" maxOccurs="1" />
+			<element name="name" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="portion" type="string" minOccurs="0"
+				maxOccurs="1" />
+			<element name="item-dish" minOccurs="0" maxOccurs="unbounded">
+				<complexType>
+					<sequence>
+						<element name="description" type="string" minOccurs="0"
+							maxOccurs="1" />
+						<element name="price" type="integer" minOccurs="0"
+							maxOccurs="1" />
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+
+	<simpleType name="itemMenu">
+		<restriction base="string">
+			<enumeration value="ХОЛОДНЫЕ ЗАКУСКИ" />
+			<enumeration value="ГОРЯЧИЕ ЗАКУСКИ" />
+			<enumeration value="ЗАВТРАКИ" />
+			<enumeration value="САЛАТЫ" />
+			<enumeration value="СУПЫ" />
+			<enumeration value="РЫБНЫЕ БЛЮДА" />
+			<enumeration value="МЯСНЫЕ БЛЮДА" />
+			<enumeration value="ГАРНИРЫ" />
+			<enumeration value="БЛЮДА НА МАНГАЛЕ" />
+			<enumeration value="ОТ ШЕФ-ПОВАРА" />
+			<enumeration value="ПРИЛОЖЕНИЕ" />
+			<enumeration value="ДЕСЕРТ" />
+		</restriction>
+	</simpleType>
+
+
+
+</schema>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<main-menu xmlns="http://www.example.org/menu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.example.org/menu menu.xsd">
+	<header>
+		<photo>Фото</photo>
+		<name>Название</name>
+		<description>Описание</description>
+		<portion>Порция(грамм)</portion>
+		<price>Цена(руб.)</price>
+	</header>
+	<category id="C1" name="ХОЛОДНЫЕ ЗАКУСКИ">
+		<dish>
+			<photo>Fish.jpg</photo>
+			<name>Ассорти рыбное</name>
+			<portion>100/20/15</portion>
+			<item-dish>
+				<description>Слабосоленая форель, семга
+				</description>
+			</item-dish>
+		</dish>
+		<dish>
+			<photo>RussianAppetizer.jpg</photo>
+			<name>Закуска по-русски</name>
+			<portion>70/50/2/10</portion>
+			<item-dish>
+				<description>Кусочки атлантической сельди с отварным картофелем,
+					луком, лимоном и зеленью
+				</description>
+			</item-dish>
+		</dish>
+		<dish>
+			<photo>Eggplant.jpg</photo>
+			<name>Ассорти баклажаны</name>
+			<portion>100/5</portion>
+			<item-dish>
+				<description>с помидорами</description>
+			</item-dish>
+			<item-dish>
+				<description>с чесноком</description>
+			</item-dish>
+			<item-dish>
+				<description>с орехами</description>
+			</item-dish>
+		</dish>
+	</category>
+
+	<category id="C2" name="ГОРЯЧИЕ ЗАКУСКИ">
+		<dish>
+			<photo>lobio.jpg</photo>
+			<name>Лобио с шампиньонами</name>
+			<portion>150/5</portion>
+			<item-dish>
+				<description>Фасоль с шампиньонами и грецким орехом</description>
+				<price>105</price>
+			</item-dish>
+		</dish>
+		<dish>
+			<photo>julienne.jpg</photo>
+			<name>Жульен</name>
+			<portion>120/1</portion>
+			<item-dish>
+				<description>с курицей
+				</description>
+				<price>145</price>
+			</item-dish>
+			<item-dish>
+				<description>с грибами
+				</description>
+				<price>155</price>
+			</item-dish>
+		</dish>
+		<dish>
+			<photo>ahmatar.jpg</photo>
+			<name>Ахтамар мясной</name>
+			<portion>1 шт.</portion>
+			<item-dish>
+				<description>Колбаса, ветчина, буженина, сыр, запеченные на мангале
+					в лаваше
+				</description>
+				<price>165</price>
+			</item-dish>
+		</dish>
+	</category>
+	<category id="C3" name="ЗАВТРАКИ">
+		<dish>
+			<photo>egg.jpg</photo>
+			<name>Глазунья</name>
+			<portion>150</portion>
+			<item-dish>
+				<description>2 яйца(на выбор: ветчина, сыр, помидоры)</description>
+				<price>105</price>
+			</item-dish>
+		</dish>
+		<dish>
+			<photo>omelette.jpg</photo>
+			<name>Омлет</name>
+			<portion>100</portion>
+		</dish>
+		<dish>
+			<photo>pancake.jpg</photo>
+			<name>Блинчики с мясом</name>
+			<portion>150</portion>
+			<item-dish>
+				<description>Жареные блинчики с мясом
+				</description>
+				<price>150</price>
+			</item-dish>
+		</dish>
+	</category>
+</main-menu>	
