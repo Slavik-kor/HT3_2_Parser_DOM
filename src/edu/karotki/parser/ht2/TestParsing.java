@@ -1,4 +1,4 @@
-package edu.karotki.ht2.main;
+package edu.karotki.parser.ht2;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;

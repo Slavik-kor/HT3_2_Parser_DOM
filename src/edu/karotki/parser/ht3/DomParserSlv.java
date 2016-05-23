@@ -1,4 +1,4 @@
-package edu.karotki.ht2.dom;
+package edu.karotki.parser.ht3;
 
 import java.io.File;
 import java.util.ArrayList;
