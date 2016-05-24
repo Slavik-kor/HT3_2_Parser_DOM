@@ -1,9 +1,10 @@
 package edu.karotki.parser.ht3;
 
-import java.util.List;
-
-public interface Document extends Component{
-      
+public class Document extends Node{
+	private Node node;
 	
+	public Document(Node node){
+		this.node=node;
+	}
 
 }

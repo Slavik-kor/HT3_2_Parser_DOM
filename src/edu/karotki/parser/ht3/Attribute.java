@@ -17,4 +17,11 @@ public class Attribute {
 		return key;
 	}
 
+	public void setValue(String value){
+		this.value=value;
+	}
+	
+	public void setKey(String key){
+		this.key=key;
+	}
 }
