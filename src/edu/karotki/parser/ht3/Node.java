@@ -1,9 +1,11 @@
 package edu.karotki.parser.ht3;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Node {
-	
+	private static final String TAG="(\\<(/?[^\\>]+)\\>)";
 	private ArrayList<Node> childs= new ArrayList<Node>();
 	private ArrayList<Attribute> attributes= new ArrayList<Attribute>();
 	private String tag;
@@ -38,8 +40,12 @@ public class Node {
 	}
 	
 	public boolean isNode(){
-		if (childs.isEmpty()) { return false;}
-		return true;
+		Pattern p = Pattern.compile(TAG);
+		Matcher m = p.matcher(text);
+		int i=0;
+		while (m.find()){i++;}
+		if (i>0) { return true;}
+		return false;
 	}
 
 }

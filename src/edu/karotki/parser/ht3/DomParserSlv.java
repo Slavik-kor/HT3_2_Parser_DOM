@@ -7,8 +7,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DomParserSlv {
-	public static final String BEGINTAG="(\\<(/?[^\\>]+)\\>)";
-	public static final String ENDTAG="(\\<[^/](/?[^\\>]+)\\>)";
+	public static final String TAG="(\\<(/?[^\\>]+)\\>)";
+	public static final String BEGINTAG="(\\<[^/](/?[^\\>]+)\\>)";
+	public static final String XMLTAG="(\\<[?xml][^/](/?[^\\>]+)[xml?]\\>)";
 	
 	public Node parse(File file){
 		String str=readFile(file);				
@@ -26,7 +27,7 @@ public class DomParserSlv {
 			in.close();		
 		}
 		catch(Exception e){e.printStackTrace();}
-		System.out.println(s);
+	//	System.out.println(s);
 		return s;
 	}
 	
@@ -34,23 +35,39 @@ public class DomParserSlv {
 		Node node = new Node();
 		node.setTextContent(text);
 		int i=0; 
-	//	 String tag=new String("");
 		Pattern p = Pattern.compile(BEGINTAG);
 		Matcher m = p.matcher(text);
-		if ((m.find())) {
-			System.out.println(analizeTag(m.group()));
-		}
+		
 		do{
+			int end=0;
 			
 			if (m.find()) {
+				Pattern tagp=Pattern.compile(XMLTAG);
+				Matcher tagm=tagp.matcher(m.group());
+				if (tagm.find()){
+				continue;
+				}
+				
 				node.appendChild(new Node());
 				node.getChildNodes().get(i).setTag(analizeTag(m.group()));
-				int end=text.indexOf("</"+analizeTag(m.group())+">");
-				int start=text.indexOf(m.group())+m.group().length();
+				end=text.indexOf("</"+analizeTag(m.group())+">",m.end());
+				//System.out.println(end);
+				int start=m.end();//text.indexOf(m.group())+m.group().length();
+				//System.out.println(text.substring(start, end));
 				node.getChildNodes().get(i).setTextContent(text.substring(start, end));
-			}
-			if (node.getChildNodes().get(i).isNode()){ }
-		    i++;
+			
+			if (node.getChildNodes().get(i).isNode()){
+				String str=node.getChildNodes().get(i).getTextContent();
+				node.getChildNodes().remove(i);
+				node.appendChild(parseLevel(str));
+			}	
+			//text=text.substring(end+m.group().length());
+			
+			} else {break;}
+			
+			i++;
+			//System.out.println(i);
+		    
 				
 			
 		}while(!text.isEmpty());		
