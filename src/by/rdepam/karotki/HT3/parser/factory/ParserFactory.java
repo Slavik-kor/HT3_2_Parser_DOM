@@ -6,6 +6,7 @@ public class ParserFactory {
 	private static final ParserFactory factory= new ParserFactory();
 	
 	private ParserFactory(){
+		super();
 	}
 	
 	public static ParserFactory newInstance(){
