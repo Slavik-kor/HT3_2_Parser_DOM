@@ -1,4 +1,4 @@
-package edu.karotki.parser.ht3;
+package by.rdepam.karotki.HT3.parser.service;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -6,6 +6,8 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import by.rdepam.karotki.HT3.parser.domain.Node;
 
 public class DomParserSlv {
 	public static final String TAG="(\\<(/?[^\\>]+)\\>)";

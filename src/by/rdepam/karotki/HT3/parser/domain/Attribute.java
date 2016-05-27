@@ -1,4 +1,4 @@
-package edu.karotki.parser.ht3;
+package by.rdepam.karotki.HT3.parser.domain;
 
 public class Attribute {
 	private String key;

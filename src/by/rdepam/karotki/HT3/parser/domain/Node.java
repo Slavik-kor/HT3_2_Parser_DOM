@@ -1,4 +1,4 @@
-package edu.karotki.parser.ht3;
+package by.rdepam.karotki.HT3.parser.domain;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
