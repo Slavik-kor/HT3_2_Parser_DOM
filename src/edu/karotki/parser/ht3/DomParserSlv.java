@@ -2,7 +2,8 @@ package edu.karotki.parser.ht3;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,14 +13,38 @@ public class DomParserSlv {
 	public static final String XMLTAG="(\\<[?xml][^/](/?[^\\>]+)[xml?]\\>)";
 	
 	public Node parse(File file){
-		String str=readFile(file);				
-		return parseLevel(str);
+		String str=readFile(file);	
+		Node node=new Node();
+		Pattern p = Pattern.compile(BEGINTAG);
+		Matcher m = p.matcher(str);
+		int end=0;
+	
+			while (m.find(end)) {
+				Pattern tagp=Pattern.compile(XMLTAG);
+				Matcher tagm=tagp.matcher(m.group());
+				if (tagm.find()){
+			    end=tagm.end();
+				continue;
+				}
+				
+				 String t=analizeTag(m.group());	
+				int start=m.end();
+				end=str.indexOf("</"+t+">",start);
+			    node.setTag(t);
+			    node.setTextContent(str.substring(start, end));
+			
+			    
+			if (node.isNode()){
+				node=parseLevel(node);
+						} 
+			}
+		return node;
 	}
 	
 	private String readFile(File file){
 		String s="";
 		try{
-			BufferedReader in=new BufferedReader(new FileReader(file));
+			BufferedReader in=new BufferedReader(new InputStreamReader(new FileInputStream(file),"UTF-8"));
 			String k;		
 			while((k=in.readLine())!=null){
 				s=s+k.trim();			
@@ -27,50 +52,30 @@ public class DomParserSlv {
 			in.close();		
 		}
 		catch(Exception e){e.printStackTrace();}
-	//	System.out.println(s);
 		return s;
 	}
 	
-	private Node parseLevel(String text){
-		Node node = new Node();
-		node.setTextContent(text);
-		int i=0; 
+	private Node parseLevel(Node node){
+		String text=node.getTextContent();
 		Pattern p = Pattern.compile(BEGINTAG);
 		Matcher m = p.matcher(text);
-		
-		do{
-			int end=0;
-			
-			if (m.find()) {
-				Pattern tagp=Pattern.compile(XMLTAG);
-				Matcher tagm=tagp.matcher(m.group());
-				if (tagm.find()){
-				continue;
+		int end=0;
+	
+			while (m.find(end)) {
+				
+				 String t=analizeTag(m.group());	
+				int start=m.end();
+				end=text.indexOf("</"+t+">",start);
+				Node nodeChild=new Node();
+			    nodeChild.setTag(t);
+			    nodeChild.setTextContent(text.substring(start, end));
+			if (nodeChild.isNode()){
+			nodeChild=parseLevel(nodeChild);
 				}
-				
-				node.appendChild(new Node());
-				node.getChildNodes().get(i).setTag(analizeTag(m.group()));
-				end=text.indexOf("</"+analizeTag(m.group())+">",m.end());
-				//System.out.println(end);
-				int start=m.end();//text.indexOf(m.group())+m.group().length();
-				//System.out.println(text.substring(start, end));
-				node.getChildNodes().get(i).setTextContent(text.substring(start, end));
-			
-			if (node.getChildNodes().get(i).isNode()){
-				String str=node.getChildNodes().get(i).getTextContent();
-				node.getChildNodes().remove(i);
-				node.appendChild(parseLevel(str));
-			}	
-			//text=text.substring(end+m.group().length());
-			
-			} else {break;}
-			
-			i++;
-			//System.out.println(i);
-		    
-				
-			
-		}while(!text.isEmpty());		
+			node.appendChild(nodeChild);	
+							
+			}
+
 		return node;
 	}
 	
@@ -79,11 +84,9 @@ public class DomParserSlv {
 		for(int i=0;i<text.length();i++){
 			if ((text.charAt(i)==' ')||(text.charAt(i)=='>')){
 				endIndex=i-1; break;
-			}
-			
+			}		
 		}
 		return text.substring(1, endIndex+1);
-		
 	}
-	
+
 }
